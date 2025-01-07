@@ -24,12 +24,11 @@ const hanldeUsePage = async (req, res) => {
     let listusers = await GetlistUser();
     return res.render('userpage.ejs', { listusers });
 }
-const hanldeCreateUser = (req, res) => {
+const hanldeCreateUser = async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
     let username = req.body.username;
-
-    CreateUser(email, password, username);
+    let respones = await CreateUser(email, password, username);
     res.redirect("/users");
 }
 const hanldeDeleteuser = async (req, res) => {
@@ -42,8 +41,8 @@ const hanldeEditVieweUser = async (req, res) => {
     let id = req.params.id;
     let user = await EditViewUser(id);
     let userview = {};
-    if (user && user.length > 0) {
-        userview = user[0];
+    if (user) {
+        userview = user;
     }
 
     return res.render('userupdate.ejs', { userview });
