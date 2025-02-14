@@ -17,13 +17,15 @@ var salt = bcrypt.genSaltSync(10);
 
 
 const hanldeHelloword = (req, res) => {
+    console.log('Cookies: ', req.cookies);
 
+    console.log('Signed Cookies: ', req.signedCookies)
     return res.render('home.ejs');
 }
-const hanldeUsePage = async (req, res) => {
-    let listusers = await GetlistUser();
-    return res.render('userpage.ejs', { listusers });
-}
+// const hanldeUsePage = async (req, res) => {
+//     let listusers = await GetlistUser();
+//     return res.render('userpage.ejs', { listusers });
+// }
 const hanldeCreateUser = async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
@@ -57,6 +59,6 @@ const hanldeEditUser = async (req, res) => {
 
 }
 module.exports = {
-    hanldeHelloword, hanldeUsePage, hanldeCreateUser,
+    hanldeHelloword, hanldeCreateUser,
     hanldeDeleteuser, hanldeEditVieweUser, hanldeEditUser
 };
